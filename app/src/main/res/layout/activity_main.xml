@@ -19,15 +19,28 @@
         android:scaleType="centerCrop" />
 
     <Button
-        android:text="Find Restaurants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorAccent"
+        android:text="Find Restaurants"
+        android:id="@+id/findRestaurantsButton"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:layout_above="@+id/savedRestaurantsButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Saved Restaurants"
+        android:id="@+id/savedRestaurantsButton"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/findRestaurantsButton" />
-
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
