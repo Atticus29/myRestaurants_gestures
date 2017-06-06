@@ -1,4 +1,4 @@
-package com.epicodus.myrestaurants;
+package com.epicodus.myrestaurants.adapters;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
