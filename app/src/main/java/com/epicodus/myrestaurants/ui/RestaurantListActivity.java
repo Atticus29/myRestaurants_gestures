@@ -27,61 +27,63 @@ import okhttp3.Response;
 public class RestaurantListActivity extends AppCompatActivity {
 
 
-    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
-
-
-    public static final String TAG = RestaurantListActivity.class.getSimpleName();
-        private SharedPreferences mSharedPreferences;
-        private String mRecentAdress;
-
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
-    private RestaurantListAdapter mAdapter;
+//    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+//
+//
+//    public static final String TAG = RestaurantListActivity.class.getSimpleName();
+//        private SharedPreferences mSharedPreferences;
+//        private String mRecentAdress;
+//
+//    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+//    private RestaurantListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants);
-        ButterKnife.bind(this);
-
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
-
-        getRestaurants(location);
-
+    }
+}
+//        ButterKnife.bind(this);
+//
+//        Intent intent = getIntent();
+//        String location = intent.getStringExtra("location");
+//
+//        getRestaurants(location);
+//
 //        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 //        mRecentAdress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 //        if(mRecentAdress !=null){
 //            getRestaurants(mRecentAdress);
 //        }
 //        Log.d("Shared Pref Location", mRecentAdress);
+//
+//    }
+//
+//    private void getRestaurants(String location) {
+//        final YelpService yelpService = new YelpService();
+//        yelpService.findRestaurants(location, new Callback() {
+//
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) {
+//                mRestaurants = yelpService.processResults(response);
+//
+//                RestaurantListActivity.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mAdapter = new RestaurantListAdapter(getApplicationContext(), mRestaurants);
+//                        mRecyclerView.setAdapter(mAdapter);
+//                        RecyclerView.LayoutManager layoutManager =
+//                                new LinearLayoutManager(RestaurantListActivity.this);
+//                        mRecyclerView.setLayoutManager(layoutManager);
+//                        mRecyclerView.setHasFixedSize(true);
+//                    }
+//                });
+//            }
+//        });
+//    }
 
-    }
-
-    private void getRestaurants(String location) {
-        final YelpService yelpService = new YelpService();
-        yelpService.findRestaurants(location, new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) {
-                mRestaurants = yelpService.processResults(response);
-
-                RestaurantListActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter = new RestaurantListAdapter(getApplicationContext(), mRestaurants);
-                        mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(RestaurantListActivity.this);
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
-                    }
-                });
-            }
-        });
-    }
-}
