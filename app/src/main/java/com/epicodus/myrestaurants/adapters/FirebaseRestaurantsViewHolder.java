@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class FirebaseRestaurantsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private static final int MAX_WIDTH =  200;
     private static final int MAX_HEIGHT = 200;
+    public ImageView mRestaurantImageView;
 
     View mView;
     Context mContext;
@@ -42,7 +43,7 @@ public class FirebaseRestaurantsViewHolder extends RecyclerView.ViewHolder imple
         itemView.setOnClickListener(this);
     }
     public void bindRestaurant(Restaurant restaurant) {
-        ImageView restaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
+        mRestaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.restaurantNameTextView);
         TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
@@ -51,7 +52,7 @@ public class FirebaseRestaurantsViewHolder extends RecyclerView.ViewHolder imple
                 .load(restaurant.getImageUrl())
                 .resize(MAX_WIDTH, MAX_HEIGHT)
                 .centerCrop()
-                .into(restaurantImageView);
+                .into(mRestaurantImageView);
 
         nameTextView.setText(restaurant.getName());
         categoryTextView.setText(restaurant.getCategories().get(0));
