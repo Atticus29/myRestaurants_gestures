@@ -9,7 +9,9 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -118,13 +120,17 @@ public class RestaurantListFragment extends Fragment {
     @Override
     // Method is now void, menu inflater is now passed in as argument:
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
+        Log.d("test", "createOptions");
         // Call super to inherit method from parent:
         super.onCreateOptionsMenu(menu, inflater);
 
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(getActivity());
 
-        MenuItem menuItem = menu.findItem(R.id.action_logout);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -146,6 +152,8 @@ public class RestaurantListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
+
+
     private void addToSharedPreferences(String location) {
         mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
