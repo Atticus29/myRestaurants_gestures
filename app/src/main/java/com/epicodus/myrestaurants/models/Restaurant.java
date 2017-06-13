@@ -32,7 +32,7 @@ public class Restaurant {
         this.phone = phone;
         this.website = website;
         this.rating = rating;
-        this.imageUrl = imageUrl;
+        this.imageUrl = getLargeImageUrl(imageUrl);
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
