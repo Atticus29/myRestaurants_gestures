@@ -1,6 +1,7 @@
 package com.epicodus.myrestaurants.ui;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,6 +24,7 @@ import com.epicodus.myrestaurants.R;
 import com.epicodus.myrestaurants.adapters.RestaurantListAdapter;
 import com.epicodus.myrestaurants.models.Restaurant;
 import com.epicodus.myrestaurants.services.YelpService;
+import com.epicodus.myrestaurants.util.OnRestaurantSelectedListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ public class RestaurantListFragment extends Fragment {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
+
+    private OnRestaurantSelectedListener mOnRestaurantSelectedListener;
 
     public RestaurantListFragment() {
         // Required empty public constructor
@@ -75,6 +79,16 @@ public class RestaurantListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnRestaurantSelectedListener = (OnRestaurantSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
+
     private void getRestaurants(String location) {
         final YelpService yelpService = new YelpService();
         yelpService.findRestaurants(location, new Callback() {
@@ -96,7 +110,7 @@ public class RestaurantListFragment extends Fragment {
                     @Override
                     public void run() {
 
-                        mAdapter = new RestaurantListAdapter(getActivity(), mRestaurants);
+                        mAdapter = new RestaurantListAdapter(getActivity(), mRestaurants, mOnRestaurantSelectedListener);
                         // Line above states `getActivity()` instead of previous
                         // 'getApplicationContext()' because fragments do not have own context,
                         // must instead inherit it from corresponding activity.
