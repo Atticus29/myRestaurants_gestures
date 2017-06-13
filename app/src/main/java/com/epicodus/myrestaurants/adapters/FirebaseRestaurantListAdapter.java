@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MotionEventCompat;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -133,9 +134,7 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Resta
     private void setIndexInFirebase() {
         for(Restaurant restaurant : mRestaurants) {
             int index = mRestaurants.indexOf(restaurant);
-            DatabaseReference ref = getRef(index);
-            restaurant.setIndex(Integer.toString(index));
-            ref.setValue(restaurant);
+            mRef.child(restaurant.getPushId()).child("index").setValue(Integer.toString(index));
         }
     }
 
